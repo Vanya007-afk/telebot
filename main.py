@@ -16,11 +16,15 @@ class igroki():
 @bot.message_handler(commands=["cm"])
 def handle_text(message):
     if message.chat.id == 345632366:
-        bot.send_message(message.chat.id, bot.get_chat_member((message.text).strip("/cm "),(message.text).strip("/cm ")).user)
+        try:
+            bot.send_message(message.chat.id,bot.get_chat_member((message.text).strip("/cm "), (message.text).strip("/cm ")).user)
+        except:
+            bot.send_message(message.chat.id, "введиде /cm [id]")
 
 
 @bot.message_handler(commands=["stop"])
 def handle_text(message):
+    global ocheredi
     if message.chat.id in igroc:
         bot.send_message(message.chat.id,"Вы успешно покинули чат")
         bot.send_message(igroc[message.chat.id].igrok1,"Ваш собеседник покинул чат")
@@ -30,6 +34,7 @@ def handle_text(message):
     elif message.chat.id == ocheredi:
         bot.send_message(message.chat.id,"Вы успешно покинули очередь")
         print("id:" + str(message.chat.id) + " - /stop очередь")
+        ocheredi = 0
     else:
         bot.send_message(message.chat.id,"-")
 
